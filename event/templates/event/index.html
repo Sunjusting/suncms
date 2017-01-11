@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}活动列表{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+	<!-- BEGIN PAGE -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<h3 class="page-title">
+					活动管理
+				</h3>
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home"></i>
+						<a href="">首页</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>
+						<a href="">活动管理</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>我的活动</li>
+
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>					
+		</div>
+			
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="portlet-body">
+					<div class="table-toolbar"><div class="row">
+						<div class="btn-group col-md-8">
+							<a href="{% url 'event-add' %}" class="btn green">
+								新增活动 <i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<form action="{% url 'event-index' %}" method="GET">
+						<div class="col-md-4">
+							<div class="input-group"> 						
+								<input type="text" class="form-control" name="k" >
+								<span class="input-group-btn">
+									<button class="btn blue" type="submit"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</div></form>
+
+					</div></div>
+
+					<table class="table table-striped table-bordered table-hover">
+						<!-- <thead>
+							<tr>	 -->									
+								<!-- <th class="center">序号</th> -->
+								<!-- <th class="center">缩略图</th>
+								<th class="right">活动名称</th>
+								<th class="center">分类</th>
+								<th class="center">城市</th>
+								<th class="center">起始时间</th> -->
+								<!-- <th class="center">状态</th>	 -->
+						<!-- 		<th>操作</th>
+							</tr>
+						</thead> --> 
+
+						<tbody>
+							{% for item in events %}
+								<tr class="odd gradeX">		
+									<!-- <td class="center">{{ item.id }}</td> -->
+									<td class="center" style="width:180px">
+										<img src="/uploads/{{item.image}}" width="160" height="120">
+									</td>
+									<td class="left">
+										<h4><a href="{% url 'event-show' item.id %}">{{ item.name }}</a></h4>
+										<p>起始时间：{{item.start_at|date:"Y-m-d"}} -- {{item.end_at|date:"Y-m-d"}}</p>
+										<p>{{item.category.name}} | {{item.city.city}}</p> 
+										<p>
+											<a href="{% url 'event-edit' item.id %}">
+											<i class="fa fa-pencil"></i> 编辑
+										</a> | 									
+										<a href="{% url 'event-agendas' item.id %}"><i class="fa fa-calendar"></i> 日程管理</a> | 
+										<a href=""><i class="fa fa-file-text-o"></i>  设计报名表</a> |
+										<a href=""><i class="fa fa-rss"></i> 新闻管理</a> | 
+										<a href=""><i class="fa fa-puzzle-piece"></i> 参会者管理</a> | 
+										<a href=""><i class="fa fa-magic"></i> 现场签到管理</a>
+										</p>
+									</td>
+									
+								</tr>
+							{% endfor %}	
+						</tbody>
+
+					</table>
+					<div>
+						{{ pagestr|safe }}
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE PORTLET-->
+
+			</div>
+
+		</div>	
+		
+	</div>
+	
+</div>
+
+{% endblock %}
+

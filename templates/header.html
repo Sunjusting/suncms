@@ -1,0 +1,42 @@
+<div class="header navbar navbar-inverse navbar-fixed-top">
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <div class="navbar-inner">      
+        <!-- BEGIN LOGO -->
+        <div class="navbar-brand" style="padding:10px;color:#fff;font-weigth:bold">
+          CCPIT CMS
+        </div>
+        <!-- END LOGO -->
+
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <img src="/static/img/menu-toggler.png" alt="" />
+        </a>          
+        <!-- END RESPONSIVE MENU TOGGLER -->            
+
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        
+        <ul class="nav navbar-nav navbar-right">     
+          
+          <!-- BEGIN USER LOGIN DROPDOWN -->
+          <li class="dropdown user">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+            <img alt="" src="/static/img/face-man.jpg" class="img-circle-1" /> 
+            <span class="username" style="padding-left:5px"> {{ request.session.username }} </span>
+            <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href=""><i class="fa fa-user"></i> 我的档案</a></li>
+              <li><a href=""><i class="fa fa-key"></i> 修改密码</a></li> 
+              <li class="divider"></li>
+              <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> 退 出</a></li>
+            </ul>
+          </li>
+          <!-- END USER LOGIN DROPDOWN -->
+        </ul>
+        
+        <!-- END TOP NAVIGATION MENU -->       
+    </div>
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>

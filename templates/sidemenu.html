@@ -1,0 +1,78 @@
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+<div class="page-sidebar navbar-collapse collapse">
+  <!-- BEGIN SIDEBAR MENU -->
+  <ul class="page-sidebar-menu">
+    <li class="sidebar-toggler-wrapper">
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+      <div class="sidebar-toggler hidden-phone"></div>
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    </li>       
+    
+    {% if 'admin' in request.session.rbac %}
+
+    <li class="start {% if menu == 'admin' %} active {% endif %}">
+      <a href="javascript:;">
+        <i class="fa fa-home"></i>
+        <span class="title">系统管理</span>
+        <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+        {% if 'admin-index' in request.session.rbac %}
+        <li class="{% if submenu == 'admin-index' %} active {% endif %}">
+          <a href="{% url 'admin-index' %}">控制面板</a>
+        </li>    
+        {% endif %}
+        {% if 'admin-agencies' in request.session.rbac %}
+        <li class="{% if submenu == 'admin-agencies' %} active {% endif %}">
+          <a href="{% url 'admin-agencies' %}">机构管理</a>
+        </li>
+        {% endif %}
+        {% if 'admin-users' in request.session.rbac %}
+        <li class="{% if submenu == 'admin-users' %} active {% endif %}">
+          <a href="{% url 'admin-users' %}">用户管理</a>
+        </li>
+        {% endif %}
+        {% if 'admin-roles' in request.session.rbac %}
+        <li class="{% if submenu == 'admin-roles' %} active {% endif %}">
+          <a href="{% url 'admin-roles' %}">角色管理</a>
+        </li>
+        {% endif %}
+        {% if 'admin-rules' in request.session.rbac %}
+        <li class="{% if submenu == 'admin-rules' %} active {% endif %}">
+          <a href="{% url 'admin-rules' %}">权限管理</a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </li>
+    {% endif %}
+    
+    {% if 'event' in request.session.rbac %}
+    <li class="start {% if menu == 'event' %} active {% endif %}">
+      <a href="javascript:;">
+        <i class="fa fa-home"></i>
+        <span class="title">活动管理</span>
+        <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+        {% if 'event-index' in request.session.rbac %}
+        <li class="{% if submenu == 'event-index' %} active {% endif %}">
+          <a href="{% url 'event-index' %}">我的活动</a>
+        </li>
+        {% endif %}
+      </ul>
+
+
+
+
+
+    {% endif %}
+    
+    
+  </ul>
+
+  <!-- END SIDEBAR MENU -->
+
+</div>
+</div>

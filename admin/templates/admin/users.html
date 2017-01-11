@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}用户列表{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+	<!-- BEGIN PAGE -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<h3 class="page-title">
+					用户管理
+				</h3>
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home"></i>
+						<a href="">Home</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>
+						<a href="">用户管理</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>用户列表</li>
+
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>					
+		</div>
+			
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="portlet-body">
+					<div class="table-toolbar"><div class="row">
+						<div class="btn-group col-md-8">
+							<a href="{% url 'admin-add-user' %}" class="btn green">
+								新增用户 <i class="fa fa-plus"></i>
+							</a>
+						</div>
+						<form action="{% url 'admin-users' %}" method="GET">
+						<div class="col-md-4">
+							<div class="input-group"> 						
+								<input type="text" class="form-control" name="k" >
+								<span class="input-group-btn">
+									<button class="btn blue" type="submit"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</div></form>
+
+					</div></div>
+
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>										
+								<th class="center">序号</th>
+								<th class="">用户名</th>
+								<th class="hidden-480 center">所属机构</th>
+								<th class="hidden-480 center">昵称</th>
+								<th class="hidden-480 center">电话</th>
+								<th class="hidden-480 center">状态</th>	
+								<th class="hidden-480 center">最后登录</th>	
+								<th>操作</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{% load admin_tags %}
+							{% for item in users %}
+								<tr class="odd gradeX">		
+									<td class="center">{{ item.id }}</td>
+									<td class="">
+										{{ item.username }}	
+									</td>
+									<td class="hidden-480 center">{{ item.agency_id }}</td>
+									<td class="center hidden-480">{{ item.nickname }}</td>
+									<td class="center hidden-480">{{ item.phone }}</td>
+									<td class="center hidden-480">
+										{% if item.status == 1 %}
+											<span class="badge badge-info">启用</span>
+										{% else %}
+											<span class="badge badge-warning">禁用</span>
+										{% endif %}
+									</td>
+									<td class="center hidden-480">{{ item.last_login_time }}</td>
+									<td >
+										<a href="{% url 'admin-edit-user' item.id %}">编辑</a> | 			
+										<a href="">
+										禁用| 
+										<a href="{% url 'admin-set-role' item.id %}">分配角色</a>	
+									</td>
+								</tr>
+							{% endfor %}	
+						</tbody>
+
+					</table>
+					<div>
+						{{ pagestr|safe }}
+					</div>
+				</div>
+				<!-- END EXAMPLE TABLE PORTLET-->
+
+			</div>
+
+		</div>	
+		
+	</div>
+	
+</div>
+
+{% endblock %}
+

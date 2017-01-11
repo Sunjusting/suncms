@@ -1,0 +1,13 @@
+<html>
+<head>
+</head>
+<body>
+	<ul>
+		{% for item in event %}
+		<li>
+			<h3><a href="{% url 'front-show' item.id %}">{{item.name}}</a></h3>
+		</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>

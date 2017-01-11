@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}分配角色{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+	<!-- BEGIN PAGE -->
+	<div class="page-content">				
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+					<h3 class="page-title">
+						配置角色【 {{roleName}} 】权限
+					</h3>
+					<ul class="breadcrumb">							
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="">首页</a> 
+						</li>
+						<li>
+							<a href="">用户系统</a> 
+						</li>
+						<li>
+							<a href="">角色管理</a>
+						</li>	
+						<li>角色权限配置</li>					
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+					<div class="portlet-body">
+					<form method="POST" >
+						{% csrf_token %}	
+						<table class="table table-striped table-bordered table-hover" id="sample_1">
+							<thead>
+								<tr>
+									<th class="center">序号</th>
+									<th class="center">选定</th>
+									<th class="">权限</th>
+									<th>权限中文名称</th>
+									<th>附加规则</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								{% load admin_tags %}
+								{% for item in rules %}
+									<tr class="odd gradeX">
+										<td class="center">{{item.id}}</td>
+										<th class="center">
+											<input style="" type="checkbox"  name="access" value="{{item.id}}"
+											{% if item.checked == '1' %}
+												checked="checked"
+											{% endif %}
+											>
+										</th>	
+										<td>
+											{% if item.level > 1 %}
+												|
+												{% for i in item.level|list %}
+													----
+												{% endfor %}
+											{% endif %}
+											{{item.name}}
+										</td>
+										<td>
+											{% if item.level > 1 %}
+												|
+												{% for i in item.level|list %}
+													----
+												{% endfor %}
+											{% endif %}
+											{{item.title}}
+										</td>
+										<td>{{item.condition}}</td>
+										
+									</tr>
+								{% endfor %}
+							</tbody>
+
+						</table>
+						<div>
+							<div class="form-actions col-md-12">
+								<input type="hidden" name="id" value="{{id}}">
+								<button type="submit" class="btn blue"><i class="icon-ok"></i> 保 存</button>
+								<button type="button" class="btn" id="cancel-btn">取 消</button>
+							</div>
+						</div>
+					</form>
+					</div>
+					<!-- END EXAMPLE TABLE PORTLET-->
+
+				</div>
+
+			</div>
+		</div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+	jQuery("#cancel-btn").click(function(){
+		history.back();
+	});
+</script>
+
+{% endblock %}
+

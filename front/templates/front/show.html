@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body>
+	<h2>
+		{{event.name}}
+	</h2>
+	<div>
+		<img src="{{event.image.url}}">
+	</div>
+	<p>
+		主办：{{event.hosts}}
+	</p>
+	<p>
+		承办：{{event.organizer}}
+	</p>
+	<p>简介</p>
+	<p>{{event.intro|safe}}</p>
+</body>
+</html>

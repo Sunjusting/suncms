@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}权限列表{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+	<!-- BEGIN PAGE -->
+	<div class="page-content">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+				<h3 class="page-title">
+					日程管理
+				</h3>
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home"></i>
+						<a href="">Home</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>
+						<a href="">日程管理</a> 
+						<i class="icon-angle-right"></i>
+					</li>
+					<li>日程列表</li>
+
+				</ul>
+				<!-- END PAGE TITLE & BREADCRUMB-->
+			</div>					
+		</div>
+			
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="portlet-body">
+					<div class="table-toolbar">
+						<div class="btn-group">
+							<a href="{% url 'event-add-agenda' event_id %}" class="btn green">
+								新增日程 <i class="fa fa-plus"></i>
+							</a>
+						</div>								
+					</div>
+
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>										
+								<th class="center">序号</th>
+								<th class="hidden-480 center">日期</th>
+								<th class="hidden-480 center">起止时间</th>
+								<th class="center">主题</th>
+								<th class="center">地点</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{% for item in agendas %}
+								<tr class="odd gradeX">		
+									<td class="center">{{ item.id }}</td>
+									<td class="center">
+										{{item.day|date:"Y-m-d"}}	
+									</td>
+									<td class="hidden-480 center">{{ item.start_time }} -- {{item.end_time}}</td>
+									<td class="center hidden-480">{{ item.subject }}</td>
+									<td class="center">
+										{{ item.place }}
+									</td>
+									
+									<td >
+										<a href="{% url 'event-edit-agenda' item.id %}">编辑</a> | 
+										<a href="{% url 'event-delete-agenda' item.id %}">删除</a>
+									</td>
+								</tr>
+							{% endfor %}	
+						</tbody>
+
+					</table>
+				</div>
+				<!-- END EXAMPLE TABLE PORTLET-->
+
+			</div>
+
+		</div>	
+		
+	</div>
+	
+</div>
+
+{% endblock %}
+
