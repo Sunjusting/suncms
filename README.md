@@ -1,1 +1,1 @@
-This Project is to build a Event CMS 
+This Project is to build an Event CMS 
